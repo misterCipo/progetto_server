@@ -36,20 +36,28 @@ class ChatServer:
                 await asyncio.gather(*coros, return_exceptions=True)
 
     async def _loginUser(self, ws: ServerConnection, username: str, pwd: str) -> bool:
-        if username in self.connected_users:
-            logger.warning(f"Login errato: {username} già loggato")
+        # Controlla credenziali
+        if username not in self.authorized_users or self.authorized_users[username] != pwd:
+            logger.warning(f"Login errato: username={username} password errata")
             return False
-        if username in self.authorized_users and self.authorized_users[username] == pwd:
-            async with self.lock:
-                self.connected_users[username] = ws
-            logger.info(f"{username} login corretto")
-            
-            await self._broadcast(build_users_list_payload(self.connected_users))
-            logger.info("Lista utenti aggiornata inviata in broadcast")
-            return True
-        else:
-            logger.warning(f"Login errato: username={username} pwd errata")
-            return False
+
+        async with self.lock:
+            # Se già connesso, chiude la vecchia connessione
+            if username in self.connected_users:
+                old_ws = self.connected_users[username]
+                logger.warning(f"{username} già loggato, chiudo la vecchia connessione")
+                try:
+                    await old_ws.close(code=4000, reason="Connessione sostituita")
+                except Exception as e:
+                    logger.error(f"Errore chiusura vecchio socket di {username}: {e}")
+
+            # Registra la nuova connessione
+            self.connected_users[username] = ws
+
+        logger.info(f"{username} login corretto")
+        await self._broadcast(build_users_list_payload(self.connected_users))
+        logger.info("Lista utenti aggiornata inviata in broadcast")
+        return True
 
     async def _isUserLogged(self, username: str) -> bool:
         return username in self.connected_users
@@ -58,6 +66,7 @@ class ChatServer:
         if not is_valid_protocol_message(rawMsg):
             logger.warning(f"Messaggio formattato male ricevuto: {rawMsg}")
             return
+
         parts = rawMsg.strip().split(Protocol.SEPARATOR)
         cmd = parts[0]
 
@@ -83,7 +92,6 @@ class ChatServer:
             if user:
                 del self.connected_users[user]
                 logger.info(f"{user} client disconnesso")
-                
                 await self._broadcast(build_users_list_payload(self.connected_users))
                 logger.info("Lista utenti aggiornata inviata in broadcast")
 
