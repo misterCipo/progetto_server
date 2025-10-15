@@ -1,0 +1,26 @@
+2025-10-15 14:29:22 | INFO | Server listening on localhost:6784
+2025-10-15 14:29:22 | INFO | Log file: logs/log-2025-10-15_14-29-22.log
+2025-10-15 14:29:37 | INFO | User 'matm' logged in successfully
+2025-10-15 14:29:37 | INFO | Broadcast to 1 user(s): ele|matm
+2025-10-15 14:29:37 | INFO | Message from 'matm': Ciao a tutti!
+2025-10-15 14:29:37 | INFO | Broadcast to 1 user(s): msg|matm|2025-10-15T14:29:37.933944|Ciao a tutti!
+2025-10-15 14:30:09 | WARNING | User 'matm' is already logged in. Closing previous connection.
+2025-10-15 14:30:09 | INFO | User 'matm' logged in successfully
+2025-10-15 14:30:09 | INFO | Broadcast to 1 user(s): ele|matm
+2025-10-15 14:30:09 | INFO | Message from 'matm': Ciao a tutti!
+2025-10-15 14:30:09 | INFO | Broadcast to 1 user(s): msg|matm|2025-10-15T14:30:09.644355|Ciao a tutti!
+2025-10-15 14:30:19 | WARNING | User 'matm' is already logged in. Closing previous connection.
+2025-10-15 14:30:19 | INFO | User 'matm' logged in successfully
+2025-10-15 14:30:19 | INFO | Broadcast to 1 user(s): ele|matm
+2025-10-15 14:30:19 | INFO | Message from 'matm': Ciao a tutti!
+2025-10-15 14:30:19 | INFO | Broadcast to 1 user(s): msg|matm|2025-10-15T14:30:19.244318|Ciao a tutti!
+2025-10-15 14:30:25 | INFO | User 'prova' logged in successfully
+2025-10-15 14:30:25 | INFO | Broadcast to 2 user(s): ele|matm,prova
+2025-10-15 14:30:25 | INFO | Message from 'prova': Ciao a tutti!
+2025-10-15 14:30:25 | INFO | Broadcast to 2 user(s): msg|prova|2025-10-15T14:30:25.269229|Ciao a tutti!
+2025-10-15 14:30:32 | INFO | User 'prova' disconnected
+2025-10-15 14:30:32 | INFO | Broadcast to 1 user(s): ele|matm
+2025-10-15 14:30:32 | INFO | User list updated and broadcasted
+2025-10-15 14:30:34 | INFO | User 'matm' disconnected
+2025-10-15 14:30:34 | INFO | Broadcast to 0 user(s): ele|
+2025-10-15 14:30:34 | INFO | User list updated and broadcasted
