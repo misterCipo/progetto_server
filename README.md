@@ -18,11 +18,12 @@ Server di chat asincrono sviluppato in Python con `asyncio` e `websockets`.   Ge
 
 ```
 progetto_server/
-│
-├── server.py              # Entrypoint e logica principale
-├── utils.py               # Funzioni trasversali
-├── users.txt              # File contenente utenti autorizzati
-├── requirements.txt       # Librerie richieste
+  ├── server.py              # Entrypoint e logica principale
+  ├── utils.py               # Funzioni trasversali
+  ├── users.txt              # File contenente utenti autorizzati
+  ├── logs/
+  │   ├── log-data-ora.log   # File di log 
+  ├── requirements.txt       # Librerie richieste
 ```
 
 ---
