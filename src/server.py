@@ -5,8 +5,8 @@ python -m venv venv (Windows)
 python -m venv venv (macOS)
 -> Creazione ambiente virtuale
 
-venv\Scripts\activate (Windows)
-source venv\bin\activate (macOS)
+venv\\Scripts\\activate (Windows)
+source venv\\bin\\activate (macOS)
 -> Attivazione ambiente virtuale.
 
 pip install -r requirements.txt (Windows)
