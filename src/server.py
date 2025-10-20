@@ -41,7 +41,7 @@ from utils import *  # import funzioni helper e classi per protocollo
 # ============================
 # Default settings
 # ============================
-DEFAULT_HOST = "localhost"  # host di default su cui ascolta il server
+DEFAULT_HOST = ""  # host di default su cui ascolta il server
 DEFAULT_PORT = 6784         # porta di default
 LOGS_DIR = "logs"           # cartella dove vengono salvati i log
 
@@ -130,8 +130,6 @@ class ChatServer:
             self.connected_users[username] = ws  # registra nuova connessione
         
         logger.info(f"User '{username}' logged in successfully")
-        # aggiorna lista utenti per tutti i client
-        await self._broadcast(build_users_list_payload(self.connected_users))
         return True
 
     async def _isUserLogged(self, username: str) -> bool:
@@ -152,6 +150,8 @@ class ChatServer:
             case Protocol.LOGIN_REQUEST:
                 login_result = await self._loginUser(ws, parts[1], parts[2])
                 await self._send(ws, build_login_response(login_result))
+                if login_result: 
+                    await self._broadcast(build_users_list_payload(self.connected_users))
 
             case Protocol.MSG:
                 username = parts[1]
